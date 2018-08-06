@@ -1,0 +1,39 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: 778209
+    url: jdbc:mysql://localhost:3306/artificial_review_system?characterEncoding=utf-8
+    dbcp2:
+      initial-size: 20
+      max-idle: 20
+      min-idle: 10
+      min-evictable-idle-time-millis: 3600000
+      default-auto-commit: true
+    tomcat:
+      max-active: 50
+  jpa:
+    show-sql: true
+  jackson:
+    default-property-inclusion: non_null
+#  redis:
+#    host: 182.132.212.123
+#    port: 66080
+server:
+  context-path:  /Webresource
+#logging:
+#  pattern:
+#    console: "%d - %msg%n"
+## path: /var/log/tomcat/
+#  file: /var/log/tomcat/sell.log
+##  level:
+##    com.laohu.***
+#  level: debug
+
+logging:
+  level:
+    package com.xmduruo.dao: info
+mybatis:
+  typeAliasesPackage: com.duruo.po
+  mapper-locations: classpath:mappers/*.xml
+

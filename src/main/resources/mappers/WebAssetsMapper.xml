@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.duruo.dao.WebAssetsMapper" >
+  <resultMap id="BaseResultMap" type="com.duruo.po.WebAssets" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="resource_name" property="resourceName" jdbcType="VARCHAR" />
+    <result column="resource_type" property="resourceType" jdbcType="VARCHAR" />
+    <result column="resource_value" property="resourceValue" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, resource_name, resource_type, resource_value, create_time, modify_time
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from web_resources
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from web_resources
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.duruo.po.WebAssets" >
+    insert into web_resources (id, resource_name, resource_type, 
+      resource_value, create_time, modify_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{resourceName,jdbcType=VARCHAR}, #{resourceType,jdbcType=VARCHAR}, 
+      #{resourceValue,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{modifyTime,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.duruo.po.WebAssets" >
+    insert into web_resources
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="resourceName != null" >
+        resource_name,
+      </if>
+      <if test="resourceType != null" >
+        resource_type,
+      </if>
+      <if test="resourceValue != null" >
+        resource_value,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="modifyTime != null" >
+        modify_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="resourceName != null" >
+        #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceType != null" >
+        #{resourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceValue != null" >
+        #{resourceValue,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.duruo.po.WebAssets" >
+    update web_resources
+    <set >
+      <if test="resourceName != null" >
+        resource_name = #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceType != null" >
+        resource_type = #{resourceType,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceValue != null" >
+        resource_value = #{resourceValue,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="modifyTime != null" >
+        modify_time = #{modifyTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.duruo.po.WebAssets" >
+    update web_resources
+    set resource_name = #{resourceName,jdbcType=VARCHAR},
+      resource_type = #{resourceType,jdbcType=VARCHAR},
+      resource_value = #{resourceValue,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      modify_time = #{modifyTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="list" resultMap="BaseResultMap" parameterType="map">
+    SELECT <include refid="Base_Column_List"/>
+    FROM web_resources
+    <where>
+      <if test="resourceName !=null and resourceName != ''" >
+        and resource_name like "%"#{resourceName,jdbcType=VARCHAR}"%"
+      </if>
+      <if test="resourceValue !=null and resourceValue !=''">
+        and resource_value like "%"#{resourceValue,jdbcType=varchar}"%"
+      </if>
+    </where>
+  </select>
+</mapper>
