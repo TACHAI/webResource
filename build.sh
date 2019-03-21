@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 
-mvn clean packge -Dmaven.test.skip=true -U
+#mvn clean packge -Dmaven.test.skip=true -U
+mvn -B -DskipTests clean package
 
-docker build -t hub.c.163.com/tc1206966083/webresource .
+docker build -t tachai/webresource .
 
-docker push hub.c.163.com/tc1206966083/webresource
+docker push registry.cn-hangzhou.aliyuncs.com/tachai/webresource
